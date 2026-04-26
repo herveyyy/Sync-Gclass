@@ -11,7 +11,7 @@ export default function LoginPage() {
       <Decorations preset="onboarding" />
 
       <PageContainer size="narrow">
-        <BrutalCard shadowSize="lg" className="p-16 text-center">
+        <BrutalCard shadowSize="lg" className="p-8 md:p-16 text-center">
           <div className="w-20 h-20 mx-auto mb-8 bg-[#f8e600] border-brutal rounded-xl flex items-center justify-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
             <span className="text-4xl">📚</span>
           </div>

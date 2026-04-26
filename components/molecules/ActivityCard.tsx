@@ -24,7 +24,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
   }
 
   return (
-    <div className="border-brutal rounded-xl p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-transform flex gap-6">
+    <div className="border-brutal rounded-xl p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-transform flex flex-col sm:flex-row gap-4 sm:gap-6">
       <div
         className={`w-12 h-12 shrink-0 rounded-xl border-2 border-black flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
           isAnnouncement ? "bg-[#f8e600]" : "bg-[#0266ff]"

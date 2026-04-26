@@ -13,7 +13,7 @@ export default function OnboardingPage() {
       <Decorations preset="onboarding" />
 
       <PageContainer size="narrow">
-        <BrutalCard shadowSize="lg" className="p-16">
+        <BrutalCard shadowSize="lg" className="p-8 md:p-16">
           <div className="w-16 h-16 mx-auto mb-6 bg-[#b8fd4b] border-brutal rounded-xl flex items-center justify-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
             <HiSparkles className="text-3xl text-[#1d1c10]" />
           </div>

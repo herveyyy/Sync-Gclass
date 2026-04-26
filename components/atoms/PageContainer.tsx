@@ -18,7 +18,7 @@ export function PageContainer({
   };
 
   return (
-    <main className={`${sizeMap[size]} mx-auto py-16 px-8 ${className}`}>
+    <main className={`${sizeMap[size]} mx-auto py-12 md:py-16 px-4 md:px-8 ${className}`}>
       {children}
     </main>
   );

@@ -17,8 +17,8 @@ export function BrutalCard({
 }: BrutalCardProps) {
   const shadowMap = {
     sm: "shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]",
-    md: "shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
-    lg: "shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]",
+    md: "shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
+    lg: "shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] md:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]",
   };
 
   const hoverStyle = hasHover
@@ -27,7 +27,7 @@ export function BrutalCard({
 
   return (
     <div
-      className={`border-brutal rounded-xl p-8 ${bgColor} ${shadowMap[shadowSize]} ${hoverStyle} ${className}`}
+      className={`border-brutal rounded-xl p-6 md:p-8 ${bgColor} ${shadowMap[shadowSize]} ${hoverStyle} ${className}`}
     >
       {children}
     </div>

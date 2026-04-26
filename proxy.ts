@@ -9,7 +9,7 @@ export async function proxy(request: NextRequest) {
 
   // Check if the route is protected
   const isProtected = protectedRoutes.some((route) =>
-    pathname.startsWith(route)
+    pathname.startsWith(route),
   );
 
   if (isProtected) {
@@ -21,19 +21,15 @@ export async function proxy(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
-    // If logged in but not onboarded, redirect to /onboarding
     const isOnboarded = (session as any)?.is_onboarded;
     if (!isOnboarded && pathname !== "/onboarding") {
       return NextResponse.redirect(new URL("/onboarding", request.url));
     }
-
-    // If onboarded but on /onboarding, redirect to /classroom
     if (isOnboarded && pathname === "/onboarding") {
       return NextResponse.redirect(new URL("/classroom", request.url));
     }
   }
 
-  // If user is logged in and visits / or /login, redirect to /classroom
   if (pathname === "/" || pathname === "/login") {
     const session = await auth();
     if (session) {

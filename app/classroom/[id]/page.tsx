@@ -47,14 +47,14 @@ export default async function ClassroomDetailsPage({
       </Link>
 
       <BrutalCard bgColor="bg-[#f9f4df]" shadowSize="lg" className="mb-12">
-        <div className="flex justify-between items-start mb-6 gap-4">
-          <Heading className="text-5xl">{classroom.name}</Heading>
+        <div className="flex flex-col md:flex-row justify-between items-start mb-6 gap-6">
+          <Heading className="text-3xl md:text-5xl">{classroom.name}</Heading>
           {classroom.alternateLink && (
             <a
               href={classroom.alternateLink}
               target="_blank"
               rel="noreferrer"
-              className="px-5 py-2.5 bg-white border-2 border-black rounded-xl font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-transform shrink-0"
+              className="px-5 py-2.5 bg-white border-2 border-black rounded-xl font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-transform shrink-0 text-center w-full md:w-auto"
             >
               Open Google Classroom
             </a>
