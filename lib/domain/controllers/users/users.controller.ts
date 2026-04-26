@@ -5,7 +5,7 @@ import { IUsersController } from "./users.interface";
 export class UsersController implements IUsersController {
   constructor(private readonly _usersService: UsersService) {}
 
-  async getUsers(): Promise<UserSelect[]> {
+  async getUsers(): Promise<unknown> {
     try {
       const result = await this._usersService.getUsers();
       return result;

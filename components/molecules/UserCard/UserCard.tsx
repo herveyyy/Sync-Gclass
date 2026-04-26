@@ -13,7 +13,9 @@ export const UserCard = ({ user }: UserCardProps) => {
   return (
     <div className="flex justify-between items-center p-4 border rounded-lg shadow-sm bg-white dark:bg-zinc-900 dark:border-zinc-800">
       <div>
-        <h2 className="text-lg font-semibold">{user.name}</h2>
+        <h2 className="text-lg font-semibold">
+          {user.firstName} {user.lastName}
+        </h2>
         <p className="text-sm text-gray-500">{user.email}</p>
       </div>
       <Button onClick={() => handleDelete(user.id)} variant="danger">
