@@ -7,7 +7,6 @@ const protectedRoutes = ["/classroom", "/onboarding"];
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Check if the route is protected
   const isProtected = protectedRoutes.some((route) =>
     pathname.startsWith(route),
   );

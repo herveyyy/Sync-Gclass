@@ -9,7 +9,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Terrah",
+  title: "Ylern",
   description: "Sync and manage your Google Classroom courses",
 };
 

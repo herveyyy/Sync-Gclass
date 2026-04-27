@@ -27,7 +27,7 @@ export default async function ClassroomDetailsPage({
         </p>
         <Link
           href="/classroom"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-[#b8fd4b] border-brutal shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rounded-xl font-bold text-[#1d1c10]"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-tertiary border-brutal shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rounded-xl font-bold text-[#1d1c10]"
         >
           <HiArrowLeft /> Back to Dashboard
         </Link>

@@ -1,21 +1,29 @@
 import Link from "next/link";
 import { SiGoogleclassroom } from "react-icons/si";
-import { HiArrowRight, HiSparkles, HiCreditCard, HiBolt } from "react-icons/hi2";
+import {
+  HiArrowRight,
+  HiSparkles,
+  HiCreditCard,
+  HiBolt,
+} from "react-icons/hi2";
 import { HiOutlineLogin } from "react-icons/hi";
 import { Chip } from "@/components/atoms/Chip";
 import { Decorations } from "@/components/atoms/Decorations";
 import { PageContainer } from "@/components/atoms/PageContainer";
 import { Heading } from "@/components/atoms/Heading";
 import { FeatureCard } from "@/components/molecules/FeatureCard";
-
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center min-h-screen px-8 relative overflow-hidden">
       <Decorations preset="landing" />
 
       <PageContainer className="flex flex-col items-center text-center py-24">
-        <div className="w-24 h-24 mb-8 bg-[#f8e600] border-brutal rounded-2xl flex items-center justify-center shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-          <SiGoogleclassroom className="text-5xl text-[#1d1c10]" />
+        <div className="my-2">
+          <img
+            src={"./logo.svg"}
+            alt="Ylern Logo"
+            className="w-32 h-32 object-contain"
+          />
         </div>
 
         <Chip
@@ -26,8 +34,8 @@ export default function Home() {
           AI-Powered
         </Chip>
 
-        <Heading className="mb-6">Terrah</Heading>
-        
+        <Heading className="mb-6">Ylern</Heading>
+
         <p className="max-w-xl text-xl font-bold text-[#4a4731] mb-12">
           Your AI-powered study companion. Sync Google Classroom, generate study
           guides, and ace your courses — powered by credits.
@@ -36,14 +44,14 @@ export default function Home() {
         <div className="flex flex-wrap gap-6 justify-center mb-20">
           <Link
             href="/classroom"
-            className="px-10 py-5 rounded-xl border-brutal shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] text-xl font-extrabold text-black bg-[#f8e600] hover:bg-[#d9c900] transition-all active:translate-x-2 active:translate-y-2 active:shadow-none inline-flex items-center gap-3"
+            className="px-10 py-5 rounded-xl border-brutal shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] text-xl font-extrabold text-black bg-primary hover:bg-primary-dim transition-all active:translate-x-2 active:translate-y-2 active:shadow-none inline-flex items-center gap-3"
           >
             Go to Classroom
             <HiArrowRight className="text-2xl" />
           </Link>
           <Link
             href="/login"
-            className="px-10 py-5 rounded-xl border-brutal shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] text-xl font-extrabold text-white bg-[#0266ff] hover:bg-[#0050cc] transition-all active:translate-x-2 active:translate-y-2 active:shadow-none inline-flex items-center gap-3"
+            className="px-10 py-5 rounded-xl border-brutal shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] text-xl font-extrabold text-white bg-secondary hover:bg-secondary-dim transition-all active:translate-x-2 active:translate-y-2 active:shadow-none inline-flex items-center gap-3"
           >
             Sign In
             <HiOutlineLogin className="text-2xl" />
@@ -73,7 +81,7 @@ export default function Home() {
 
         <Link
           href="/pricing"
-          className="mt-12 text-lg font-extrabold text-[#0266ff] hover:underline"
+          className="mt-12 text-lg font-extrabold text-secondary hover:underline"
         >
           View Pricing &rarr;
         </Link>
