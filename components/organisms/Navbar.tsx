@@ -1,63 +1,75 @@
 import Link from "next/link";
-import Image from "next/image";
 import { auth } from "@/auth";
 import { SiGoogleclassroom } from "react-icons/si";
-import { LogoutButton } from "./LogoutButton";
+import { HiHome } from "react-icons/hi2";
+import { UserDropdown } from "./UserDropdown";
 
 export async function Navbar() {
   const session = await auth();
-
   if (!session?.user) return null;
 
   return (
-    <nav className="border-b-4 border-black bg-white">
-      <div className="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
-        {/* Left — Brand */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-[#f8e600] border-2 border-black rounded-lg flex items-center justify-center shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] group-active:translate-x-0.5 group-active:translate-y-0.5 group-active:shadow-none transition-all">
-            <SiGoogleclassroom className="text-xl text-[#1d1c10]" />
+    <nav className="border-b-4 border-black bg-surface">
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
+        {/* LEFT — BRAND */}
+        <Link href="/home" className="flex items-center gap-2 group">
+          <div className="w-10 h-10 bg-[#ffec00] border-4 border-black rounded-lg flex items-center justify-center shadow-[4px_4px_0px_#000] group-active:translate-x-[2px] group-active:translate-y-[2px] group-active:shadow-[2px_2px_0px_#000]">
+            <SiGoogleclassroom className="text-xl text-black" />
           </div>
-          <span className="text-2xl font-extrabold text-[#1d1c10]">Terrah</span>
+          <span className="hidden sm:block text-xl font-extrabold text-black">
+            Terrah
+          </span>
         </Link>
 
-        {/* Center — Nav links */}
-        <div className="hidden md:flex items-center gap-6">
+        {/* CENTER — NAV */}
+        <div className="flex items-center gap-2 sm:gap-4">
+          {/* HOME */}
+          <Link
+            href="/home"
+            className="
+              flex items-center justify-center gap-2
+              px-3 lg:px-5
+              h-12 lg:h-14
+              border-4 border-black
+              rounded-xl
+              bg-[#ffec00]
+              shadow-[6px_6px_0px_#000]
+              hover:bg-primary
+              active:translate-x-[3px] active:translate-y-[3px]
+              active:shadow-[3px_3px_0px_#000]
+            "
+          >
+            <HiHome className="text-2xl text-black" />
+            <span className="hidden lg:block font-extrabold text-black text-sm">
+              Home
+            </span>
+          </Link>
+
+          {/* CLASSROOM */}
           <Link
             href="/classroom"
-            className="text-base font-bold text-[#4a4731] hover:text-[#1d1c10] transition-colors"
+            className="
+              flex items-center justify-center gap-2
+              px-3 lg:px-5
+              h-12 lg:h-14
+              border-4 border-black
+              rounded-xl
+              bg-white
+              shadow-[6px_6px_0px_#000]
+              hover:bg-secondary hover:text-white
+              active:translate-x-[3px] active:translate-y-[3px]
+              active:shadow-[3px_3px_0px_#000]
+            "
           >
-            Classroom
-          </Link>
-          <Link
-            href="/pricing"
-            className="text-base font-bold text-[#4a4731] hover:text-[#1d1c10] transition-colors"
-          >
-            Pricing
+            <SiGoogleclassroom className="text-2xl" />
+            <span className="hidden lg:block font-extrabold text-sm">
+              Classroom
+            </span>
           </Link>
         </div>
 
-        {/* Right — User */}
-        <div className="flex items-center gap-4">
-          <div className="hidden sm:flex flex-col items-end">
-            <span className="text-sm font-extrabold text-[#1d1c10] leading-tight">
-              {session.user.name}
-            </span>
-            <span className="text-xs font-bold text-[#7c785f] leading-tight">
-              {session.user.email}
-            </span>
-          </div>
-
-          {session.user.image && (
-            <Image
-              src={session.user.image}
-              alt={session.user.name || "Profile"}
-              width={44}
-              height={44}
-              className="rounded-xl border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
-            />
-          )}
-
-          <LogoutButton />
+        <div className="flex items-center">
+          <UserDropdown user={session.user} />
         </div>
       </div>
     </nav>

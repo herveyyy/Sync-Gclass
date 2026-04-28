@@ -7,7 +7,9 @@ export interface GetCourseListInput {
 export class GetCourseListUseCase {
   async execute(input: GetCourseListInput): Promise<any[]> {
     try {
-      const classroomClient = getAuthenticatedClassroomClient(input.accessToken);
+      const classroomClient = getAuthenticatedClassroomClient(
+        input.accessToken,
+      );
       const res = await classroomClient.courses.list({
         courseStates: ["ACTIVE"],
       });

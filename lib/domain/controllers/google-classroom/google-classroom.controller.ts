@@ -18,7 +18,8 @@ export class GoogleClassroomController implements IGoogleClassroomController {
 
   async syncSingleCourse(courseId: string): Promise<boolean> {
     try {
-      const result = await this._googleClassroomService.syncSingleCourse(courseId);
+      const result =
+        await this._googleClassroomService.syncSingleCourse(courseId);
       return result;
     } catch (e) {
       console.error("Error in syncSingleCourse: ", e);
@@ -28,7 +29,9 @@ export class GoogleClassroomController implements IGoogleClassroomController {
 
   async getClassroomDetails(googleClassroomId: string): Promise<any> {
     try {
-      return await this._googleClassroomService.getClassroomDetails(googleClassroomId);
+      return await this._googleClassroomService.getClassroomDetails(
+        googleClassroomId,
+      );
     } catch (e) {
       console.error("Error in getClassroomDetails:", e);
       throw e;

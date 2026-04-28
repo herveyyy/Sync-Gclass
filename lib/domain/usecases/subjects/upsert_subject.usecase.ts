@@ -8,18 +8,32 @@ export interface UpsertSubjectInput {
 
 export class UpsertSubjectUseCase {
   async execute(input: UpsertSubjectInput): Promise<void> {
-    await db
-      .insert(subjects)
-      .values({
-        googleSubjectName: input.googleSubjectName,
-        userId: input.userId,
-        name: input.googleSubjectName,
-      })
-      .onConflictDoUpdate({
-        target: subjects.googleSubjectName,
-        set: {
+    try {
+      await db
+        .insert(subjects)
+        .values({
+          googleSubjectName: input.googleSubjectName,
+          userId: input.userId,
           name: input.googleSubjectName,
-        },
+        })
+        .onConflictDoUpdate({
+          target: subjects.googleSubjectName,
+          set: {
+            name: input.googleSubjectName,
+          },
+        });
+    } catch (error) {
+      console.error("Error upserting subject:", error);
+      throw error;
+    }
+  }
+
+  async upsertSubjectsForUser(userId: string, googleSubjectNames: string[]) {
+    for (const subjectName of googleSubjectNames) {
+      await this.execute({
+        googleSubjectName: subjectName,
+        userId,
       });
+    }
   }
 }

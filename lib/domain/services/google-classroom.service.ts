@@ -9,8 +9,10 @@ import { UpsertClassroomUseCase } from "../usecases/classrooms/upsert_classroom.
 import { UpsertSubjectUseCase } from "../usecases/subjects/upsert_subject.usecase";
 import { UpsertActivityUseCase } from "../usecases/activities/upsert_activity.usecase";
 import { GetClassroomDetailsUseCase } from "../usecases/classrooms/get_classroom_details.usecase";
+import { GetClassroomListByUserIdUseCase } from "../usecases/classrooms/get_classroom_list_by_userId.usecase";
 
 export class GoogleClassroomService {
+  private _dbClassroomList = new GetClassroomListByUserIdUseCase();
   constructor(
     private readonly _getCourseListUseCase: GetCourseListUseCase,
     private readonly _getCourseWorkUseCase: GetCourseWorkUseCase,
@@ -29,13 +31,16 @@ export class GoogleClassroomService {
     if (!accessToken || !dbUserId) {
       throw new Error("Unauthorized: No access token found. Please sign in.");
     }
+    const classrooms = await this._dbClassroomList.execute(dbUserId);
+    if (classrooms) {
+      return classrooms;
+    }
 
     const courses = await this._getCourseListUseCase.execute({ accessToken });
 
     for (const course of courses) {
       if (!course.id) continue;
 
-      // Upsert Classroom
       const classroomDbId = await this._upsertClassroomUseCase.execute({
         googleClassroomId: course.id,
         userId: dbUserId,
@@ -57,7 +62,11 @@ export class GoogleClassroomService {
         });
       }
 
-      await this._syncActivitiesForClassroom(accessToken, course.id, classroomDbId);
+      await this._syncActivitiesForClassroom(
+        accessToken,
+        course.id,
+        classroomDbId,
+      );
     }
 
     return courses;
@@ -80,22 +89,30 @@ export class GoogleClassroomService {
       .limit(1);
 
     if (existingClassroom.length === 0) {
-      throw new Error("Classroom not found in database. Please sync all courses first.");
+      throw new Error(
+        "Classroom not found in database. Please sync all courses first.",
+      );
     }
 
     const classroomDbId = existingClassroom[0].id;
-    await this._syncActivitiesForClassroom(accessToken, courseId, classroomDbId);
+    await this._syncActivitiesForClassroom(
+      accessToken,
+      courseId,
+      classroomDbId,
+    );
     return true;
   }
 
   async getClassroomDetails(googleClassroomId: string) {
-    return await this._getClassroomDetailsUseCase.execute({ googleClassroomId });
+    return await this._getClassroomDetailsUseCase.execute({
+      googleClassroomId,
+    });
   }
 
   private async _syncActivitiesForClassroom(
     accessToken: string,
     googleClassroomId: string,
-    classroomDbId: string
+    classroomDbId: string,
   ) {
     // Fetch & Upsert Coursework
     const courseworkItems = await this._getCourseWorkUseCase.execute({

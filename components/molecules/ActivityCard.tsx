@@ -27,7 +27,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
     <div className="border-brutal rounded-xl p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-transform flex flex-col sm:flex-row gap-4 sm:gap-6">
       <div
         className={`w-12 h-12 shrink-0 rounded-xl border-2 border-black flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
-          isAnnouncement ? "bg-[#f8e600]" : "bg-[#0266ff]"
+          isAnnouncement ? "bg-primary" : "bg-secondary"
         }`}
       >
         {isAnnouncement ? (
@@ -56,7 +56,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
         <div className="flex justify-between items-end mt-4">
           <div>
             {dueDateStr && (
-              <span className="inline-flex items-center px-3 py-1 bg-[#ffdad6] border-2 border-[#ba1a1a] rounded-lg text-sm font-bold text-[#93000a]">
+              <span className="inline-flex items-center px-3 py-1 bg-[#ffdad6] border-2 border-error rounded-lg text-sm font-bold text-[#93000a]">
                 Due: {dueDateStr}
               </span>
             )}
@@ -66,7 +66,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
               href={activity.alternateLink}
               target="_blank"
               rel="noreferrer"
-              className="text-sm font-bold text-[#0266ff] hover:underline"
+              className="text-sm font-bold text-secondary hover:underline"
             >
               View in Google Classroom &rarr;
             </a>
