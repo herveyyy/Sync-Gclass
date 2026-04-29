@@ -1,5 +1,18 @@
-import SwipeStack from "@/components/organisms/SwipeStack";
+"use client";
+
+import dynamic from "next/dynamic";
 import { mockBlogPosts } from "@/lib/utils/mockData";
+
+const SwipeStack = dynamic(() => import("@/components/organisms/SwipeStack"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full max-w-2xl h-[500px] flex items-center justify-center bg-gray-50 border-4 border-dashed border-gray-200 rounded-2xl animate-pulse">
+      <p className="text-gray-400 font-black uppercase italic">
+        Loading Feed...
+      </p>
+    </div>
+  ),
+});
 
 type Props = {};
 
@@ -12,7 +25,7 @@ const page = (props: Props) => {
           <SwipeStack posts={mockBlogPosts} />
         </div>
         {/* SIDEBAR - RIGHT (Visible on Desktop/Tablet Landscape) */}
-        <div className="hidden lg:flex lg:col-span-5 flex-col gap-4 h-full py-4 lg:py-6 justify-start overflow-y-auto scrollbar-hide">
+        <div className="hidden lg:flex lg:col-span-5 flex-col gap-4 h-full py-4 lg:py-6 justify-start overflow-y-auto scroll-smooth">
           {/* CTA PANEL */}
           <div className="bg-black text-white border-4 border-black rounded-2xl p-6 shadow-[10px_10px_0px_#ffec00] flex items-center justify-between group cursor-pointer overflow-hidden">
             <div className="z-10">

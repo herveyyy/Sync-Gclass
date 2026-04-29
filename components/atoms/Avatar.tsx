@@ -1,4 +1,4 @@
-import React from "react";
+import Image from "next/image";
 
 interface AvatarProps {
   name: string;
@@ -27,11 +27,12 @@ export default function Avatar({ name, avatarUrl, size = "md" }: AvatarProps) {
       className={`relative rounded-full overflow-hidden bg-indigo-100 text-indigo-600 font-bold flex items-center justify-center shrink-0 border-2 border-white shadow-sm ${sizeClasses[size]}`}
     >
       {avatarUrl ? (
-        /* eslint-disable-next-line @next/next/no-img-element */
-        <img
+        <Image
           src={avatarUrl}
           alt={`${name}'s avatar`}
-          className="w-full h-full object-cover"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover"
         />
       ) : (
         <span>{getInitials(name)}</span>
