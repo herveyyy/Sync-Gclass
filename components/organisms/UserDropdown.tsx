@@ -66,7 +66,7 @@ export function UserDropdown({ user }: { user: User }) {
       {isOpen && (
         <>
           {/* MOBILE OVERLAY */}
-          <div className="fixed inset-0 z-50 bg-surface md:hidden flex flex-col">
+          <div className="fixed inset-0 z-100 bg-surface md:hidden flex flex-col">
             {/* HEADER */}
             <div className="flex items-center justify-between p-4 border-b-4 border-black">
               <p className="text-lg font-extrabold">Account</p>

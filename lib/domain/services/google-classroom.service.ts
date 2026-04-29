@@ -24,52 +24,55 @@ export class GoogleClassroomService {
   ) {}
 
   async syncCourses() {
-    const session = await auth();
-    const accessToken = (session as any)?.access_token;
-    const dbUserId = (session as any)?.db_user_id;
+    try {
+      const session = await auth();
+      const accessToken = (session as any)?.access_token;
+      const dbUserId = (session as any)?.db_user_id;
 
-    if (!accessToken || !dbUserId) {
-      throw new Error("Unauthorized: No access token found. Please sign in.");
-    }
-    const classrooms = await this._dbClassroomList.execute(dbUserId);
-    if (classrooms) {
-      return classrooms;
-    }
+      if (!accessToken || !dbUserId) {
+        throw new Error("Unauthorized: No access token found. Please sign in.");
+      }
+      const existingClassrooms = await this._dbClassroomList.execute(dbUserId);
+      if (existingClassrooms && existingClassrooms.length > 0) {
+        return existingClassrooms;
+      }
+      const courses = await this._getCourseListUseCase.execute({ accessToken });
+      for (const course of courses) {
+        if (!course.id) continue;
 
-    const courses = await this._getCourseListUseCase.execute({ accessToken });
-
-    for (const course of courses) {
-      if (!course.id) continue;
-
-      const classroomDbId = await this._upsertClassroomUseCase.execute({
-        googleClassroomId: course.id,
-        userId: dbUserId,
-        name: course.name || "Untitled Course",
-        section: course.section || null,
-        room: course.room || null,
-        subject: course.subject || null,
-        courseState: course.courseState || null,
-        alternateLink: course.alternateLink || null,
-      });
-
-      if (!classroomDbId) continue;
-
-      // Upsert Subject
-      if (course.subject) {
-        await this._upsertSubjectUseCase.execute({
-          googleSubjectName: course.subject,
+        const classroomDbId = await this._upsertClassroomUseCase.execute({
+          googleClassroomId: course.id,
           userId: dbUserId,
+          name: course.name || "Untitled Course",
+          section: course.section || null,
+          room: course.room || null,
+          subject: course.subject || null,
+          courseState: course.courseState || null,
+          alternateLink: course.alternateLink || null,
         });
+
+        if (!classroomDbId) continue;
+
+        // Upsert Subject
+        if (course.subject) {
+          await this._upsertSubjectUseCase.execute({
+            googleSubjectName: course.subject,
+            userId: dbUserId,
+          });
+        }
+
+        await this._syncActivitiesForClassroom(
+          accessToken,
+          course.id,
+          classroomDbId,
+        );
       }
 
-      await this._syncActivitiesForClassroom(
-        accessToken,
-        course.id,
-        classroomDbId,
-      );
+      return await this._dbClassroomList.execute(dbUserId);
+    } catch (error) {
+      console.log(error, "error");
+      throw error;
     }
-
-    return courses;
   }
 
   async syncSingleCourse(courseId: string) {
