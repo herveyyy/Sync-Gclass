@@ -36,7 +36,7 @@ export function UserDropdown({ user }: { user: User }) {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-3 p-1 pr-3 rounded-2xl border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all bg-white"
+        className="flex items-center justify-center lg:justify-start gap-3 w-11 h-11 lg:w-auto lg:h-14 lg:p-1 lg:pr-3 rounded-xl lg:rounded-2xl border-4 lg:border-2 border-black shadow-[4px_4px_0px_#000] lg:shadow-[3px_3px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_#000] transition-all bg-white overflow-hidden lg:overflow-visible"
       >
         {user.image ? (
           <Image
@@ -44,15 +44,15 @@ export function UserDropdown({ user }: { user: User }) {
             alt={user.name || "Profile"}
             width={36}
             height={36}
-            className="rounded-xl border-2 border-black object-cover bg-[#f3f0e6]"
+            className="w-full h-full lg:w-[36px] lg:h-[36px] rounded-sm lg:rounded-xl lg:border-2 lg:border-black object-cover bg-[#f3f0e6]"
           />
         ) : (
-          <div className="w-9 h-9 rounded-xl border-2 border-black bg-[#f3f0e6] flex items-center justify-center font-bold">
+          <div className="w-full h-full lg:w-9 lg:h-9 lg:rounded-xl lg:border-2 lg:border-black bg-[#f3f0e6] flex items-center justify-center font-black">
             {user.name?.charAt(0).toUpperCase() || "U"}
           </div>
         )}
 
-        <div className="hidden sm:flex flex-col items-start text-left">
+        <div className="hidden lg:flex flex-col items-start text-left">
           <span className="text-sm font-extrabold text-on-surface leading-none max-w-[120px] truncate">
             {user.name}
           </span>
@@ -61,7 +61,7 @@ export function UserDropdown({ user }: { user: User }) {
           </span>
         </div>
         <HiChevronDown
-          className={`text-xl transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          className={`hidden lg:block text-xl transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
 

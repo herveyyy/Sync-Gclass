@@ -100,17 +100,7 @@ export default function PostCard({ post, isDragging }: PostCardProps) {
             </button>
           </div>
 
-          {/* CTA */}
-          <div
-            className="
-              text-secondary-dim 
-              font-extrabold 
-              text-[14px] sm:text-[16px] 
-              border-b-4 border-black
-            "
-          >
-            Read →
-          </div>
+
         </div>
       </article>
     </Link>

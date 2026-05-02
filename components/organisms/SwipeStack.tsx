@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 import { FiMenu } from "react-icons/fi";
 import { BlogPost } from "@/lib/utils/mockData";
@@ -18,6 +19,7 @@ export default function SwipeStack({
   posts: initialPosts,
   onToggleSidebar,
 }: SwipeStackProps) {
+  const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleSwipe = (direction: "left" | "right") => {
@@ -41,7 +43,7 @@ export default function SwipeStack({
         {onToggleSidebar && (
           <button
             onClick={onToggleSidebar}
-            className="shrink-0 flex items-center gap-2 px-4 py-2 bg-[#ffec00] border-4 border-black rounded-xl shadow-[4px_4px_0px_#000] font-black text-sm uppercase tracking-wider active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_#000] transition-all hover:bg-yellow-300"
+            className="shrink-0 flex items-center gap-2 px-4 py-4  bg-[#ffec00] border-4 border-black rounded-xl shadow-[4px_4px_0px_#000] font-black text-sm uppercase tracking-wider active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_#000] transition-all hover:bg-yellow-300"
           >
             <FiMenu size={18} strokeWidth={3} />
           </button>
@@ -71,6 +73,7 @@ export default function SwipeStack({
         <SwipeControls
           onSkip={() => handleSwipe("left")}
           onLike={() => handleSwipe("right")}
+          onRead={() => router.push(`/blog/${visiblePosts[0].id}`)}
         />
       )}
     </div>

@@ -1,18 +1,19 @@
 "use client";
 
-import { FiX, FiHeart, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiX, FiHeart, FiChevronLeft, FiChevronRight, FiBookOpen } from "react-icons/fi";
 import IconButton from "../atoms/IconButton";
 
 interface SwipeControlsProps {
   onSkip: () => void;
   onLike: () => void;
+  onRead?: () => void;
 }
 
 /**
  * Action buttons (skip / like) and the swipe hint text.
  * Composed from IconButton atoms.
  */
-export default function SwipeControls({ onSkip, onLike }: SwipeControlsProps) {
+export default function SwipeControls({ onSkip, onLike, onRead }: SwipeControlsProps) {
   return (
     <>
       {/* ACTION BUTTONS */}
@@ -25,6 +26,18 @@ export default function SwipeControls({ onSkip, onLike }: SwipeControlsProps) {
         >
           <FiX className="text-[24px] sm:text-[32px]" strokeWidth={3} />
         </IconButton>
+
+        {onRead && (
+          <IconButton
+            onClick={onRead}
+            color="text-blue-500"
+            hoverBg="hover:bg-blue-50"
+            aria-label="Read post"
+          >
+            <FiBookOpen className="text-[24px] sm:text-[32px]" strokeWidth={3} />
+          </IconButton>
+        )}
+
         <IconButton
           onClick={onLike}
           color="text-green-500"

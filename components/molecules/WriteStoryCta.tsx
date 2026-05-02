@@ -1,4 +1,5 @@
 import React from "react";
+import { FiPlus } from "react-icons/fi";
 
 interface WriteStoryCtaProps {
   /** Optional compact mode for mobile fixed bar */
@@ -10,12 +11,11 @@ export default function WriteStoryCta({
   compact = false,
   className = "",
 }: WriteStoryCtaProps) {
-  const padding = compact ? "p-4" : "p-6";
+  const padding = compact ? "p-2" : "p-6";
   const shadow = compact
     ? "shadow-[6px_6px_0px_#ffec00]"
     : "shadow-[10px_10px_0px_#ffec00]";
   const titleSize = compact ? "text-lg" : "text-xl";
-
   const circleSize = compact ? "w-11 h-11" : "w-12 h-12";
 
   return (
@@ -30,7 +30,9 @@ export default function WriteStoryCta({
       <div
         className={`${circleSize} bg-[#ffec00] border-4 border-white rounded-full flex items-center justify-center text-black group-hover:rotate-12 transition-transform shrink-0`}
       >
-        <span className="text-2xl font-black">+</span>
+        <span className="text-xl font-black items-center justify-center flex">
+          <FiPlus strokeWidth={3} />
+        </span>
       </div>
     </div>
   );
