@@ -19,7 +19,7 @@ export default function OnboardingPage() {
           </div>
 
           <Heading className="mb-3 text-center" level={2}>
-            Welcome to Terrah!
+            Welcome to Ylern!
           </Heading>
           <p className="text-lg font-bold text-[#4a4731] mb-10 text-center">
             Tell us your name to get started.

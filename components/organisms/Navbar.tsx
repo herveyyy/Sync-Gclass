@@ -19,7 +19,7 @@ export async function Navbar() {
             className="h-12 w-12 object-cover"
           />
           <span className="hidden sm:block text-xl font-extrabold text-black">
-            Terrah
+            Ylern
           </span>
         </Link>
 
