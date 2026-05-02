@@ -23,7 +23,7 @@ export default function LoginPage() {
           <Heading level={2} className="mb-4">
             Sign In
           </Heading>
-          <p className="text-xl font-bold text-[#4a4731] mb-12">
+          <p className="text-xl font-bold text-on-surface-variant mb-12">
             Sign in with your Google account to access your Classroom courses.
           </p>
 

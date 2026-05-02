@@ -18,7 +18,7 @@ export function PageContainer({
   };
 
   return (
-    <div className="h-[calc(100vh-76px)] overflow-y-auto w-screen">
+    <div className="h-[calc(100vh-76px)]  overflow-y-auto w-screen">
       <div
         className={`${sizeMap[size]}  mx-auto py-12 md:py-16 px-4 md:px-8 ${className}`}
       >

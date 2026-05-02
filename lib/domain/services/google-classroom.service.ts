@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 import { GetCourseListUseCase } from "../usecases/google-classroom/get_course_list.usecase";
 import { GetCourseWorkUseCase } from "../usecases/google-classroom/get_coursework.usecase";
 import { GetAnnouncementsUseCase } from "../usecases/google-classroom/get_announcements.usecase";
+import { GetCourseUseCase } from "../usecases/google-classroom/get_course.usecase";
 import { UpsertClassroomUseCase } from "../usecases/classrooms/upsert_classroom.usecase";
 import { UpsertSubjectUseCase } from "../usecases/subjects/upsert_subject.usecase";
 import { UpsertActivityUseCase } from "../usecases/activities/upsert_activity.usecase";
@@ -17,6 +18,7 @@ export class GoogleClassroomService {
     private readonly _getCourseListUseCase: GetCourseListUseCase,
     private readonly _getCourseWorkUseCase: GetCourseWorkUseCase,
     private readonly _getAnnouncementsUseCase: GetAnnouncementsUseCase,
+    private readonly _getCourseUseCase: GetCourseUseCase,
     private readonly _upsertClassroomUseCase: UpsertClassroomUseCase,
     private readonly _upsertSubjectUseCase: UpsertSubjectUseCase,
     private readonly _upsertActivityUseCase: UpsertActivityUseCase,
@@ -85,19 +87,46 @@ export class GoogleClassroomService {
     }
 
     // Get the internal classroom ID from our DB
-    const existingClassroom = await db
+    let existingClassroom = await db
       .select({ id: classrooms.id })
       .from(classrooms)
       .where(eq(classrooms.googleClassroomId, courseId))
       .limit(1);
 
+    let classroomDbId: string;
+
     if (existingClassroom.length === 0) {
-      throw new Error(
-        "Classroom not found in database. Please sync all courses first.",
-      );
+      // If not found in DB, try to fetch it from Google Classroom first
+      const course = await this._getCourseUseCase.execute({
+        accessToken,
+        courseId,
+      });
+
+      if (!course || !course.id) {
+        throw new Error(
+          "Classroom not found in Google Classroom. Please ensure the course ID is correct.",
+        );
+      }
+
+      const newId = await this._upsertClassroomUseCase.execute({
+        googleClassroomId: course.id,
+        userId: dbUserId,
+        name: course.name || "Untitled Course",
+        section: course.section || null,
+        room: course.room || null,
+        subject: course.subject || null,
+        courseState: course.courseState || null,
+        alternateLink: course.alternateLink || null,
+      });
+
+      if (!newId) {
+        throw new Error("Failed to sync classroom to database.");
+      }
+      classroomDbId = newId;
+    } else {
+      classroomDbId = existingClassroom[0].id;
     }
 
-    const classroomDbId = existingClassroom[0].id;
     await this._syncActivitiesForClassroom(
       accessToken,
       courseId,

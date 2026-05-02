@@ -3,6 +3,7 @@
 import { GoogleClassroomController } from "@/lib/domain/controllers/google-classroom/google-classroom.controller";
 import { GoogleClassroomService } from "@/lib/domain/services/google-classroom.service";
 import { GetCourseListUseCase } from "@/lib/domain/usecases/google-classroom/get_course_list.usecase";
+import { GetCourseUseCase } from "@/lib/domain/usecases/google-classroom/get_course.usecase";
 import { GetCourseWorkUseCase } from "@/lib/domain/usecases/google-classroom/get_coursework.usecase";
 import { GetAnnouncementsUseCase } from "@/lib/domain/usecases/google-classroom/get_announcements.usecase";
 import { UpsertClassroomUseCase } from "@/lib/domain/usecases/classrooms/upsert_classroom.usecase";
@@ -16,6 +17,7 @@ export async function createGoogleClassroomController(): Promise<GoogleClassroom
       new GetCourseListUseCase(),
       new GetCourseWorkUseCase(),
       new GetAnnouncementsUseCase(),
+      new GetCourseUseCase(),
       new UpsertClassroomUseCase(),
       new UpsertSubjectUseCase(),
       new UpsertActivityUseCase(),

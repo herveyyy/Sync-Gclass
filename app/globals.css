@@ -22,6 +22,8 @@
   --color-surface: #fff9e6;
   --color-surface-dim: #dfdac6;
   --color-surface-bright: #ffffff;
+  --color-on-surface: #1d1c10;
+  --color-on-surface-variant: #4a4731;
   
   /* Font Families */
   --font-sans: var(--font-jakarta-sans);

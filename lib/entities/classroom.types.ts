@@ -1,5 +1,6 @@
 export type ClassRoomCourse = {
   id: string;
+  googleClassroomId: string;
   name: string;
   section?: string;
   descriptionHeading?: string;

@@ -23,7 +23,7 @@ export function CourseCard({ course }: CourseCardProps) {
       setError(null);
       setSynced(false);
       
-      await syncCourseActivities(course.id);
+      await syncCourseActivities(course.googleClassroomId);
       
       setSynced(true);
       setTimeout(() => setSynced(false), 3000);
@@ -44,7 +44,7 @@ export function CourseCard({ course }: CourseCardProps) {
       <div>
         <div className="flex justify-between items-start mb-4 gap-4">
           <h3
-            className="text-2xl font-extrabold text-[#1d1c10] leading-tight line-clamp-2"
+            className="text-2xl font-extrabold text-foreground leading-tight line-clamp-2"
             title={course.name}
           >
             {course.name}
@@ -52,18 +52,18 @@ export function CourseCard({ course }: CourseCardProps) {
           <span
             className={`inline-flex shrink-0 items-center rounded-xl px-3 py-1.5 text-sm font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
               isArchived
-                ? "bg-[#dfdac6] text-[#4a4731]"
-                : "bg-[#b8fd4b] text-[#1d1c10]"
+                ? "bg-surface-dim text-on-surface-variant"
+                : "bg-tertiary text-foreground"
             }`}
           >
             {course.courseState}
           </span>
         </div>
-        <p className="text-lg text-[#4a4731] mb-2 font-bold">
+        <p className="text-lg text-on-surface-variant mb-2 font-bold">
           {course.section || "No Section"}
         </p>
         {(course.room || course.subject) && (
-          <div className="text-base font-medium text-[#4a4731] mt-4 space-y-1 bg-[#f9f4df] p-3 rounded-lg border-2 border-black">
+          <div className="text-base font-medium text-on-surface-variant mt-4 space-y-1 bg-surface-container-low p-3 rounded-lg border-2 border-black">
             {course.room && (
               <p>
                 Room: <span className="font-bold">{course.room}</span>
@@ -80,7 +80,7 @@ export function CourseCard({ course }: CourseCardProps) {
 
       <div className="mt-8 pt-4 flex flex-col gap-3">
         {error && (
-          <p className="text-sm font-bold text-[#ba1a1a] bg-[#ffdad6] p-2 rounded-lg border-2 border-[#ba1a1a]">
+          <p className="text-sm font-bold text-error bg-error-container p-2 rounded-lg border-2 border-error">
             {error}
           </p>
         )}
@@ -91,8 +91,8 @@ export function CourseCard({ course }: CourseCardProps) {
             disabled={isSyncing}
             className={`px-4 py-3 font-bold rounded-xl border-brutal shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 ${
               synced 
-                ? "bg-[#b8fd4b] text-[#1d1c10]" 
-                : "bg-[#f8e600] text-[#1d1c10] hover:bg-[#d9c900]"
+                ? "bg-tertiary text-foreground" 
+                : "bg-primary text-foreground hover:bg-primary-dim"
             } disabled:opacity-50`}
           >
             <HiArrowPath className={`text-lg ${isSyncing ? "animate-spin" : ""}`} />
@@ -101,8 +101,8 @@ export function CourseCard({ course }: CourseCardProps) {
 
           <div className="flex items-center gap-3">
             <a
-              href={`/classroom/${course.id}`}
-              className="px-6 py-3 bg-[#0266ff] text-white font-bold rounded-xl border-brutal shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-[#0050cc] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all"
+              href={`/classroom/${course.googleClassroomId}`}
+              className="px-6 py-3 bg-secondary text-white font-bold rounded-xl border-brutal shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-secondary-dim active:translate-x-1 active:translate-y-1 active:shadow-none transition-all"
             >
               Open
             </a>

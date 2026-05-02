@@ -12,20 +12,22 @@ import { Decorations } from "@/components/atoms/Decorations";
 import { PageContainer } from "@/components/atoms/PageContainer";
 import { Heading } from "@/components/atoms/Heading";
 import { FeatureCard } from "@/components/molecules/FeatureCard";
+import { FaBridge } from "react-icons/fa6";
+import { LiaPenAltSolid } from "react-icons/lia";
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center min-h-screen px-8 relative overflow-hidden">
       <Decorations preset="landing" />
 
-      <PageContainer className="flex flex-col items-center text-center py-24">
-        <div className="my-2">
-          <img
-            src={"./logo.svg"}
-            alt="Ylern Logo"
-            className="w-32 h-32 object-contain"
-          />
-        </div>
-
+      <div className="flex flex-col items-center text-center py-24 overflow-y-auto h-screen w-screen px-6">
+        <Heading className="flex items-center gap-2 mb-6">
+          <div className=" bg-primary border-brutal rounded-xl flex items-center justify-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+            <span>
+              <LiaPenAltSolid className="text-4xl" />
+            </span>
+          </div>
+          Ylern
+        </Heading>
         <Chip
           color="green"
           icon={<HiSparkles className="text-lg" />}
@@ -33,10 +35,7 @@ export default function Home() {
         >
           AI-Powered
         </Chip>
-
-        <Heading className="mb-6">Ylern</Heading>
-
-        <p className="max-w-xl text-xl font-bold text-[#4a4731] mb-12">
+        <p className="max-w-xl text-xl font-bold text-on-surface-variant mb-12">
           Your AI-powered study companion. Sync Google Classroom, generate study
           guides, and ace your courses — powered by credits.
         </p>
@@ -85,7 +84,7 @@ export default function Home() {
         >
           View Pricing &rarr;
         </Link>
-      </PageContainer>
+      </div>
     </div>
   );
 }

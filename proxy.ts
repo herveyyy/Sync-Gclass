@@ -36,7 +36,7 @@ export async function proxy(request: NextRequest) {
       if (!isOnboarded) {
         return NextResponse.redirect(new URL("/onboarding", request.url));
       }
-      return NextResponse.redirect(new URL("/classroom", request.url));
+      return NextResponse.redirect(new URL("/home", request.url));
     }
   }
 

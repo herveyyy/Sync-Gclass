@@ -31,7 +31,7 @@ export function ActivityCard({ activity }: ActivityCardProps) {
         }`}
       >
         {isAnnouncement ? (
-          <HiSpeakerWave className="text-xl text-[#1d1c10]" />
+          <HiSpeakerWave className="text-xl text-on-surface" />
         ) : (
           <HiClipboardDocumentList className="text-xl text-white" />
         )}
@@ -39,16 +39,16 @@ export function ActivityCard({ activity }: ActivityCardProps) {
 
       <div className="flex-1">
         <div className="flex justify-between items-start gap-4 mb-2">
-          <h4 className="text-xl font-extrabold text-[#1d1c10] leading-tight">
+          <h4 className="text-xl font-extrabold text-on-surface leading-tight">
             {activity.title}
           </h4>
-          <span className="text-sm font-bold text-[#4a4731] shrink-0">
+          <span className="text-sm font-bold text-on-surface-variante-variant shrink-0">
             {date}
           </span>
         </div>
 
         {activity.description && (
-          <p className="text-base font-medium text-[#4a4731] whitespace-pre-wrap line-clamp-3 mb-4">
+          <p className="text-base font-medium text-on-surface-variant whitespace-pre-wrap line-clamp-3 mb-4">
             {activity.description}
           </p>
         )}

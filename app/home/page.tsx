@@ -1,7 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiX } from "react-icons/fi";
 import { mockBlogPosts } from "@/lib/utils/mockData";
+import SidebarContent from "@/components/organisms/SidebarContent";
 
 const SwipeStack = dynamic(() => import("@/components/organisms/SwipeStack"), {
   ssr: false,
@@ -17,81 +21,67 @@ const SwipeStack = dynamic(() => import("@/components/organisms/SwipeStack"), {
 type Props = {};
 
 const page = (props: Props) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <main className="relative h-[calc(100vh-84px)] w-full overflow-hidden flex flex-col bg-surface">
       <div className="max-w-7xl mx-auto w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-stretch px-4">
         {/* SWIPE STACK - LEFT/CENTER */}
         <div className="lg:col-span-7 flex flex-col items-center justify-center h-full">
-          <SwipeStack posts={mockBlogPosts} />
+          <SwipeStack
+            posts={mockBlogPosts}
+            onToggleSidebar={() => setIsSidebarOpen(true)}
+          />
         </div>
         {/* SIDEBAR - RIGHT (Visible on Desktop/Tablet Landscape) */}
         <div className="hidden lg:flex lg:col-span-5 flex-col gap-4 h-full py-4 lg:py-6 justify-start overflow-y-auto scroll-smooth">
-          {/* CTA PANEL */}
-          <div className="bg-black text-white border-4 border-black rounded-2xl p-6 shadow-[10px_10px_0px_#ffec00] flex items-center justify-between group cursor-pointer overflow-hidden">
-            <div className="z-10">
-              <h4 className="text-xl font-black uppercase italic">
-                Write a Story
-              </h4>
-              <p className="text-[10px] font-bold text-gray-400">
-                Share your thoughts with the community
-              </p>
-            </div>
-            <div className="w-12 h-12 bg-[#ffec00] border-4 border-white rounded-full flex items-center justify-center text-black group-hover:rotate-12 transition-transform">
-              <span className="text-2xl font-black">+</span>
-            </div>
-          </div>
-
-          {/* STATS PANEL */}
-          <div className="bg-white border-4 border-black rounded-2xl p-4 lg:p-6 shadow-[10px_10px_0px_#000]">
-            <h3 className="text-2xl font-black uppercase tracking-tight mb-6">
-              Your Activity
-            </h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-[#ffec00] border-4 border-black p-4 rounded-xl shadow-[4px_4px_0px_#000]">
-                <div className="text-3xl font-black">12</div>
-                <div className="text-xs font-bold uppercase tracking-widest">
-                  Read
-                </div>
-              </div>
-              <div className="bg-secondary text-white border-4 border-black p-4 rounded-xl shadow-[4px_4px_0px_#000]">
-                <div className="text-3xl font-black">5</div>
-                <div className="text-xs font-bold uppercase tracking-widest">
-                  Saved
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* TOP CREATORS PANEL */}
-          <div className="bg-white border-4 border-black rounded-2xl p-4 lg:p-6 shadow-[10px_10px_0px_#000]">
-            <h3 className="text-2xl font-black uppercase tracking-tight mb-6">
-              Top Storytellers
-            </h3>
-            <div className="flex flex-col gap-4">
-              {mockBlogPosts.slice(0, 3).map((post, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-4 p-3 border-4 border-black rounded-xl hover:bg-gray-50 transition-colors cursor-pointer active:translate-x-1 active:translate-y-1 active:shadow-none"
-                >
-                  <div className="w-12 h-12 bg-gray-200 border-2 border-black rounded-full overflow-hidden">
-                    <img
-                      src={post.author.avatar}
-                      alt={post.author.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <div className="font-black text-sm">{post.author.name}</div>
-                    <div className="text-[10px] font-bold text-gray-500 uppercase">
-                      1.2k Followers
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <SidebarContent />
         </div>
       </div>
+
+      {/* ───── MOBILE SIDEBAR DRAWER ───── */}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="sidebar-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setIsSidebarOpen(false)}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-90 lg:hidden"
+            />
+            {/* Drawer Panel */}
+            <motion.div
+              key="sidebar-drawer"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 350, damping: 30 }}
+              className="fixed top-0 right-0 h-full w-[85vw] max-w-sm bg-surface z-100 lg:hidden flex flex-col  border-black shadow-[-8px_0px_0px_#000]"
+            >
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between p-4 border-b-4 border-black bg-[#ffec00]">
+                <h2 className="text-lg font-black uppercase tracking-tight">
+                  Community
+                </h2>
+                <button
+                  onClick={() => setIsSidebarOpen(false)}
+                  className="w-10 h-10 flex items-center justify-center bg-white border-4 border-black rounded-full shadow-[3px_3px_0px_#000] active:translate-x-px active:translate-y-px active:shadow-[1px_1px_0px_#000] transition-all"
+                >
+                  <FiX size={20} strokeWidth={3} />
+                </button>
+              </div>
+              {/* Drawer Body */}
+              <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 scroll-smooth">
+                <SidebarContent />
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </main>
   );
 };
