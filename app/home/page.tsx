@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiX } from "react-icons/fi";
 import { mockBlogPosts } from "@/lib/utils/mockData";
 import SidebarContent from "@/components/organisms/SidebarContent";
+import WriteStoryCta from "@/components/molecules/WriteStoryCta";
+import IconButton from "@/components/atoms/IconButton";
 
 const SwipeStack = dynamic(() => import("@/components/organisms/SwipeStack"), {
   ssr: false,
@@ -39,6 +41,11 @@ const page = (props: Props) => {
         </div>
       </div>
 
+      {/* ───── MOBILE "WRITE A STORY" CTA ───── */}
+      <div className="fixed bottom-4 left-4 right-4 z-80 lg:hidden">
+        <WriteStoryCta compact />
+      </div>
+
       {/* ───── MOBILE SIDEBAR DRAWER ───── */}
       <AnimatePresence>
         {isSidebarOpen && (
@@ -60,19 +67,20 @@ const page = (props: Props) => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 350, damping: 30 }}
-              className="fixed top-0 right-0 h-full w-[85vw] max-w-sm bg-surface z-100 lg:hidden flex flex-col  border-black shadow-[-8px_0px_0px_#000]"
+              className="fixed top-0 right-0 h-full w-[85vw] max-w-sm bg-surface z-100 lg:hidden flex flex-col border-black shadow-[-8px_0px_0px_#000]"
             >
               {/* Drawer Header */}
               <div className="flex items-center justify-between p-4 border-b-4 border-black bg-[#ffec00]">
                 <h2 className="text-lg font-black uppercase tracking-tight">
                   Community
                 </h2>
-                <button
+                <IconButton
+                  size="sm"
                   onClick={() => setIsSidebarOpen(false)}
-                  className="w-10 h-10 flex items-center justify-center bg-white border-4 border-black rounded-full shadow-[3px_3px_0px_#000] active:translate-x-px active:translate-y-px active:shadow-[1px_1px_0px_#000] transition-all"
+                  aria-label="Close sidebar"
                 >
                   <FiX size={20} strokeWidth={3} />
-                </button>
+                </IconButton>
               </div>
               {/* Drawer Body */}
               <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 scroll-smooth">
