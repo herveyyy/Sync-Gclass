@@ -14,7 +14,7 @@ export async function Navbar() {
         {/* LEFT — BRAND */}
         <Link href="/home" className="flex items-center gap-2 group">
           <img
-            src="/logos/logo_1.svg"
+            src="/logos/logo_3.svg"
             alt="logo"
             className="h-12 w-12 object-cover"
           />
