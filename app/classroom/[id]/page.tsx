@@ -27,7 +27,7 @@ export default async function ClassroomDetailsPage({
         </p>
         <Link
           href="/classroom"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-tertiary border-brutal shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rounded-xl font-bold text-[#1d1c10]"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-tertiary border-brutal shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rounded-xl font-bold text-on-surface"
         >
           <HiArrowLeft /> Back to Dashboard
         </Link>
@@ -41,7 +41,7 @@ export default async function ClassroomDetailsPage({
     <PageContainer>
       <Link
         href="/classroom"
-        className="inline-flex items-center gap-2 text-lg font-bold text-[#4a4731] hover:text-black mb-8"
+        className="inline-flex items-center gap-2 text-lg font-bold text-on-surface-variant hover:text-black mb-8"
       >
         <HiArrowLeft /> Back to Dashboard
       </Link>
@@ -89,7 +89,7 @@ export default async function ClassroomDetailsPage({
             <Heading level={3} className="mb-2">
               No activities yet!
             </Heading>
-            <p className="text-lg font-medium text-[#4a4731]">
+            <p className="text-lg font-medium text-on-surface-variant">
               Sync your courses on the dashboard to see announcements and
               coursework.
             </p>

@@ -1,21 +1,12 @@
 import { mockBlogPosts } from "@/lib/utils/mockData";
 import React from "react";
+import WriteStoryCta from "../molecules/WriteStoryCta";
 
 export default function SidebarContent() {
   return (
     <>
       {/* CTA PANEL */}
-      <div className="bg-black text-white border-4 border-black rounded-2xl p-6 shadow-[10px_10px_0px_#ffec00] flex items-center justify-between group cursor-pointer overflow-hidden">
-        <div className="z-10">
-          <h4 className="text-xl font-black uppercase italic">Write a Story</h4>
-          <p className="text-[10px] font-bold text-gray-400">
-            Share your thoughts with the community
-          </p>
-        </div>
-        <div className="w-12 h-12 bg-[#ffec00] border-4 border-white rounded-full flex items-center justify-center text-black group-hover:rotate-12 transition-transform">
-          <span className="text-2xl font-black">+</span>
-        </div>
-      </div>
+      <WriteStoryCta />
 
       {/* STATS PANEL */}
       <div className="bg-white border-4 border-black rounded-2xl p-4 lg:p-6 shadow-[10px_10px_0px_#000]">

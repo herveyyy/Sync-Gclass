@@ -41,12 +41,7 @@ const page = (props: Props) => {
         </div>
       </div>
 
-      {/* ───── MOBILE "WRITE A STORY" CTA ───── */}
-      <div className="fixed bottom-4 left-4 right-4 z-80 lg:hidden">
-        <WriteStoryCta compact />
-      </div>
-
-      {/* ───── MOBILE SIDEBAR DRAWER ───── */}
+      {/* MOBILE SIDEBAR DRAWER */}
       <AnimatePresence>
         {isSidebarOpen && (
           <>
@@ -70,6 +65,8 @@ const page = (props: Props) => {
               className="fixed top-0 right-0 h-full w-[85vw] max-w-sm bg-surface z-100 lg:hidden flex flex-col border-black shadow-[-8px_0px_0px_#000]"
             >
               {/* Drawer Header */}
+              {/* MOBILE "WRITE A STORY" CTA */}
+
               <div className="flex items-center justify-between p-4 border-b-4 border-black bg-[#ffec00]">
                 <h2 className="text-lg font-black uppercase tracking-tight">
                   Community

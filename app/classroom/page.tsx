@@ -44,18 +44,18 @@ export default function ClassRoomPage() {
 
   return (
     <PageContainer size="wide">
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-8">
+      <div className="flex flex-col md:flex-row md:items-center o justify-between mb-16 gap-8">
         <div>
           <Heading level={1} className="mb-2">
             Classroom
           </Heading>
-          <p className="text-xl font-bold text-[#4a4731]">
+          <p className="text-xl font-bold text-on-surface-variant">
             Manage your Google Classroom courses.
           </p>
         </div>
         <div className="flex flex-wrap gap-6 items-center">
           {!isLoading && (
-            <div className="px-5 py-3 bg-[#f9f4df] border-2 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-base font-extrabold text-[#4a4731] flex items-center gap-2">
+            <div className="px-5 py-3 bg-[#f9f4df] border-2 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] text-base font-extrabold text-on-surface-variant flex items-center gap-2">
               <HiArrowPath className="text-lg" />
               Next sync in{" "}
               <CountdownTimer
