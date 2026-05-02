@@ -13,9 +13,11 @@ export async function Navbar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
         {/* LEFT — BRAND */}
         <Link href="/home" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-[#ffec00] border-4 border-black rounded-lg flex items-center justify-center shadow-[4px_4px_0px_#000] group-active:translate-x-[2px] group-active:translate-y-[2px] group-active:shadow-[2px_2px_0px_#000]">
-            <SiGoogleclassroom className="text-xl text-black" />
-          </div>
+          <img
+            src="/logos/logo_1.svg"
+            alt="logo"
+            className="h-12 w-12 object-cover"
+          />
           <span className="hidden sm:block text-xl font-extrabold text-black">
             Terrah
           </span>

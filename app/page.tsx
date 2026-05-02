@@ -13,21 +13,22 @@ import { PageContainer } from "@/components/atoms/PageContainer";
 import { Heading } from "@/components/atoms/Heading";
 import { FeatureCard } from "@/components/molecules/FeatureCard";
 import { FaBridge } from "react-icons/fa6";
-import { LiaPenAltSolid } from "react-icons/lia";
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center min-h-screen px-8 relative overflow-hidden">
       <Decorations preset="landing" />
 
       <div className="flex flex-col items-center text-center py-24 overflow-y-auto h-screen w-screen px-6">
-        <Heading className="flex items-center gap-2 mb-6">
-          <div className=" bg-primary border-brutal rounded-xl flex items-center justify-center shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-            <span>
-              <LiaPenAltSolid className="text-4xl" />
-            </span>
-          </div>
-          Ylern
-        </Heading>
+        <div className="flex items-center -translate-x-12 ">
+          <span>
+            <img
+              src="/logos/logo_1.svg"
+              alt="Ylern Logo"
+              className="h-32 w-32 object-contain translate-x-9 -translate-y-2"
+            />
+          </span>
+          <span className="text-6xl font-black ">lern</span>
+        </div>
         <Chip
           color="green"
           icon={<HiSparkles className="text-lg" />}
@@ -39,7 +40,6 @@ export default function Home() {
           Your AI-powered study companion. Sync Google Classroom, generate study
           guides, and ace your courses — powered by credits.
         </p>
-
         <div className="flex flex-wrap gap-6 justify-center mb-20">
           <Link
             href="/classroom"
@@ -56,7 +56,6 @@ export default function Home() {
             <HiOutlineLogin className="text-2xl" />
           </Link>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
           <FeatureCard
             icon={<HiSparkles />}
@@ -77,7 +76,6 @@ export default function Home() {
             iconBgColor="bg-[#b8fd4b]"
           />
         </div>
-
         <Link
           href="/pricing"
           className="mt-12 text-lg font-extrabold text-secondary hover:underline"
