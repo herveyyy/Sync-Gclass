@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FiClock, FiMessageSquare, FiHeart } from "react-icons/fi";
 import Avatar from "../atoms/Avatar";
 
-import { BlogPost } from "@/lib/utils/mockData";
+import { BlogPost } from "@/lib/entities/blog.types";
 
 interface PostCardProps {
   post: BlogPost;
@@ -54,11 +54,11 @@ export default function PostCard({ post, isDragging }: PostCardProps) {
         {/* CONTENT */}
         <div className="flex-1 min-h-0 overflow-hidden">
           <h2 className="text-[18px] sm:text-[24px] font-extrabold text-black mb-1 sm:mb-2 leading-tight line-clamp-2">
-            {post.title}
+            {post.header.title}
           </h2>
 
           <p className="text-[14px] sm:text-[16px] text-gray-800 mb-4 sm:mb-6 leading-relaxed line-clamp-3 sm:line-clamp-4">
-            {post.content.text}
+            {post.blocks[0]?.text}
           </p>
         </div>
 

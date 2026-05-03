@@ -43,8 +43,17 @@ export default async function BlogPage({
 
             {/* HEADLINE */}
             <h1 className="text-[36px] sm:text-[48px] font-extrabold leading-[1.1] uppercase mb-6 text-black">
-              {post.title}
+              {post.header.title}
             </h1>
+
+            {post.header.image && (
+              <div className="border-4 border-black shadow-[8px_8px_0px_#000] overflow-hidden bg-white mb-6">
+                <img src={post.header.image} alt="Header" className="w-full object-cover max-h-96" />
+              </div>
+            )}
+            {post.header.text && (
+              <p className="text-xl font-bold mb-6">{post.header.text}</p>
+            )}
 
             {/* SUB INFO STRIP */}
             <div className="flex flex-wrap items-center gap-3 mb-6 border-y-4 border-black py-3 text-black">
@@ -66,31 +75,30 @@ export default async function BlogPage({
 
             {/* CONTENT GRID */}
             <div className="grid sm:grid-cols-3 gap-6">
-              <div className="sm:col-span-2 text-[18px] leading-relaxed font-medium space-y-6 text-black">
-                {post.content.type === "text" && <p>{post.content.text}</p>}
-
-                {post.content.type === "image" && (
-                  <>
-                    {/* TEXT */}
-                    <p>{post.content.text}</p>
-
-                    {/* IMAGE GRID (newspaper clipping style) */}
-                    <div className="grid gap-4 mt-6">
-                      {post.content.images.map((img: string, i: number) => (
-                        <div
-                          key={i}
-                          className="border-4 border-black shadow-[8px_8px_0px_#000] overflow-hidden bg-white"
-                        >
-                          <img
-                            src={img}
-                            alt={`blog image ${i}`}
-                            className="w-full object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                )}
+              <div className="sm:col-span-2 text-[18px] leading-relaxed font-medium space-y-8 text-black">
+                {post.blocks.map((block) => (
+                  <div key={block.id} className="space-y-4">
+                    {block.title && <h3 className="text-2xl font-black">{block.title}</h3>}
+                    <p>{block.text}</p>
+                    
+                    {block.images && block.images.length > 0 && (
+                      <div className="grid gap-4 mt-6">
+                        {block.images.map((img: string, i: number) => (
+                          <div
+                            key={i}
+                            className="border-4 border-black shadow-[8px_8px_0px_#000] overflow-hidden bg-white"
+                          >
+                            <img
+                              src={img}
+                              alt={`blog image ${i}`}
+                              className="w-full object-cover"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
               <div className="bg-surface border-4 border-black p-4 h-fit text-black">
                 <h3 className="font-extrabold mb-2 underline decoration-4">

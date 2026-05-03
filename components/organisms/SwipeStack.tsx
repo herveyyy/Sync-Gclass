@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 import { FiMenu } from "react-icons/fi";
-import { BlogPost } from "@/lib/utils/mockData";
+import { BlogPost } from "@/lib/entities/blog.types";
 import SwipeCard from "../molecules/SwipeCard";
 import SwipeControls from "../molecules/SwipeControls";
 import EmptyFeedCard from "../molecules/EmptyFeedCard";

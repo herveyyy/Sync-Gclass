@@ -4,7 +4,14 @@ import { db } from "@/database";
 import { users } from "@/database/schema";
 import { eq } from "drizzle-orm";
 
+/** Session / token lifetime: 1 day in seconds */
+const SESSION_MAX_AGE = 60 * 60 * 24; // 24 hours
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  session: {
+    strategy: "jwt",
+    maxAge: SESSION_MAX_AGE,
+  },
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLASSROOM_CLIENT_ID,
@@ -51,9 +58,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, account, profile }) {
       if (account) {
         token.access_token = account.access_token;
+        token.token_issued_at = Date.now();
       }
       if (profile) {
         token.google_id = profile.sub;
+      }
+
+      // Force re-auth if the token is older than 1 day
+      if (
+        token.token_issued_at &&
+        Date.now() - (token.token_issued_at as number) > SESSION_MAX_AGE * 1000
+      ) {
+        return {} as typeof token;
       }
 
       if (token.google_id) {
@@ -77,10 +93,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     async session({ session, token }) {
-      (session as any).access_token = token.access_token;
-      (session as any).db_user_id = token.db_user_id;
-      (session as any).is_onboarded = token.is_onboarded;
-      (session as any).google_id = token.google_id;
+      session.access_token = token.access_token as string | undefined;
+      session.db_user_id = token.db_user_id as string | undefined;
+      session.is_onboarded = token.is_onboarded as boolean | undefined;
+      session.google_id = token.google_id as string | undefined;
       return session;
     },
   },

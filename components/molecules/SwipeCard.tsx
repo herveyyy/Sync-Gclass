@@ -8,7 +8,7 @@ import {
 } from "framer-motion";
 import PostCard from "./PostCard";
 import SwipeFeedbackLabel from "../atoms/SwipeFeedbackLabel";
-import { BlogPost } from "@/lib/utils/mockData";
+import { BlogPost } from "@/lib/entities/blog.types";
 
 interface SwipeCardProps {
   post: BlogPost;
