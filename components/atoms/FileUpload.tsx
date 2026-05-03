@@ -94,7 +94,7 @@ export default function FileUpload({
 
   return (
     <div className={`w-full ${className}`}>
-      <label className="block text-base font-extrabold text-[#1d1c10] mb-2">
+      <label className="block text-base font-extrabold text-on-surface mb-2">
         {label}
       </label>
 

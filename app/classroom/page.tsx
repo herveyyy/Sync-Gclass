@@ -11,6 +11,8 @@ import { PageContainer } from "@/components/atoms/PageContainer";
 import { Heading } from "@/components/atoms/Heading";
 import { ErrorMessage } from "@/components/atoms/ErrorMessage";
 
+import { signOut } from "next-auth/react";
+
 const SYNC_INTERVAL_SECONDS = 300;
 
 export default function ClassRoomPage() {
@@ -26,7 +28,11 @@ export default function ClassRoomPage() {
       const fetchedCourses = await getCourseList();
       setCourses(fetchedCourses as ClassRoomCourse[]);
     } catch (e: any) {
-      setError(e.message || "An error occurred while fetching courses.");
+      if (e.message?.includes("invalid authentication credentials")) {
+        signOut({ callbackUrl: "/" });
+      } else {
+        setError(e.message || "An error occurred while fetching courses.");
+      }
       console.error(e);
     } finally {
       setIsLoading(false);

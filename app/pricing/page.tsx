@@ -71,7 +71,7 @@ export default function PricingPage() {
           Pricing
         </Chip>
         <Heading className="mb-4">Pick Your Plan</Heading>
-        <p className="text-xl font-bold text-[#4a4731] max-w-lg mx-auto">
+        <p className="text-xl font-bold text-on-surface-variant max-w-lg mx-auto">
           Start free, upgrade when you need more AI power. Cancel anytime.
         </p>
       </div>
@@ -85,7 +85,7 @@ export default function PricingPage() {
       <div className="text-center">
         <Link
           href="/"
-          className="text-lg font-extrabold text-[#0266ff] hover:underline"
+          className="text-lg font-extrabold text-secondary hover:underline"
         >
           &larr; Back to Home
         </Link>
